@@ -6,16 +6,21 @@ import com.mojang.serialization.MapCodec;
 
 import fr.asqel.chou.ModBlocks;
 import fr.asqel.chou.blockentity.sieve_blockentity;
+import fr.asqel.chou.items.colored_bottle;
 import net.fabricmc.fabric.api.resource.v1.reloader.ResourceReloaderKeys.Server;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackLinkedSet;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -54,22 +59,55 @@ public class sieve extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (level.isClientSide())
+            return InteractionResult.SUCCESS;
         if (!(level.getBlockEntity(pos) instanceof sieve_blockentity sieve_ent)) {
 		    return InteractionResult.PASS;
 	    }
 
-        if (sieve_ent.getItem(1).isEmpty()) {
-            sieve_ent.setItem(1, sieve_ent.getItem(0));
-            sieve_ent.setItem(0, new ItemStack(Items.AIR));
+        if (player.getItemInHand(hand).getItem() == Items.GLASS_BOTTLE) {
+            int to_put = Math.min(64 - sieve_ent.getItem(0).count(), player.getInventory().countItem(Items.GLASS_BOTTLE));
+
+            if (sieve_ent.getItem(0).isEmpty() && to_put != 0)
+                sieve_ent.setItem(0, new ItemStack(Items.GLASS_BOTTLE, to_put));
+            else if (to_put != 0)
+                sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() + to_put);
+            player.getInventory().removeItem(new ItemStack(Items.GLASS_BOTTLE, to_put));
         }
+        else if(sieve_ent.getItem(1).count() != 0) {
+            player.getInventory().add(sieve_ent.getItem(1).copy());
+            sieve_ent.getItem(0).setCount(0);
+        }
+
+        player.sendSystemMessage(Component.literal("slot 0: " + String.valueOf(sieve_ent.getItem(0).count())));
+        player.sendSystemMessage(Component.literal("slot 1: " + String.valueOf(sieve_ent.getItem(1).count())));
+
 
         player.swing(hand); 
         return InteractionResult.SUCCESS;
     }
+    @Override
+    protected void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool, boolean dropExperience) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be == null) {
+            super.spawnAfterBreak(state, level, pos, tool, dropExperience);
+            return ;
+        }
+        if (!(be instanceof sieve_blockentity sieve_ent)) {
+            super.spawnAfterBreak(state, level, pos, tool, dropExperience);
+            return ;
+        }
+
+        level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(0)));
+        level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(1)));
+        sieve_ent.getItem(0).setCount(0);
+        sieve_ent.getItem(1).setCount(0);
+        super.spawnAfterBreak(state, level, pos, tool, dropExperience);
+    }
 
     public static boolean is_water(ServerLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        if (state.getBlock() != Blocks.WATER)
+        if (state.getBlock() == Blocks.WATER)
             return true;
         if (state.getOptionalValue(BlockStateProperties.WATERLOGGED).orElse(false))
             return true;
@@ -85,6 +123,13 @@ public class sieve extends BaseEntityBlock {
         return true;
     }
 
+    public static String get_wool_color(ServerLevel level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        String res = state.getBlock().getDescriptionId();
+        res = res.replace("block.minecraft.", "");
+        return res.replace("_wool", "");
+
+    }
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -101,7 +146,24 @@ public class sieve extends BaseEntityBlock {
             return ;
         if (!is_wool(level, wool_pos, false))
             return ;
+        String wool_color = get_wool_color(level, wool_pos);
+        ItemStack stack = sieve_ent.getItem(1);
+        System.out.println(sieve_ent.getItem(1).count());
+        System.out.println(sieve_ent.getItem(1).isEmpty());
 
+        if (sieve_ent.progress == MAX_PROGRESS) {
+            if (stack.isEmpty()) {
+                sieve_ent.items.set(1, new ItemStack(colored_bottle.get_item_from_color(wool_color)));
+            }
+            else if (stack.getItem() == colored_bottle.get_item_from_color(wool_color)) {
+                System.out.println("AAAAAAAAAAAAAaaa");
+                sieve_ent.items.set(1, new ItemStack(colored_bottle.get_item_from_color(wool_color), sieve_ent.getItem(1).count()));
+                System.out.println("AAAAAA" +  String.valueOf(sieve_ent.getItem(1).count()));
+            }
+            else
+                return ;
+            sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() - 1);
+        }
 
         sieve_ent.progress++;
     }

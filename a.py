@@ -24,3 +24,9 @@ for i in colors:
 for i in colors:
 	c = i.upper()
 	print(f"output.accept(ModItems.{c}_WATER_BOTTLE);")
+
+for i in colors:
+	a = i.lower()
+	b = i.upper()
+	print(f"""case "{a}":
+	return ModItems.{b}_WATER_BOTTLE;""")

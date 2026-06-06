@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class sieve_blockentity extends BlockEntity implements ImplementedContainer, WorldlyContainer {
-    private final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+    public final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
     public int progress = 0;
 
     public sieve_blockentity(BlockPos pos, BlockState state) {
