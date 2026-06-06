@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "chou:block/flower_pot", "y": 0 },
+    "facing=south": { "model": "chou:block/flower_pot", "y": 180 },
+    "facing=east": { "model": "chou:block/flower_pot", "y": 90},
+    "facing=west": { "model": "chou:block/flower_pot", "y": 270}
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "chou:block/yellow_ball_flower"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    " I",
+    " L"
+  ],
+  "key": {
+    "#": "minecraft:iron_nugget",
+    "I": "minecraft:iron_chain",
+    "L": "minecraft:lantern"
+  },
+  "result": {
+    "id": "chou:chain_lamp"
+  }
+}

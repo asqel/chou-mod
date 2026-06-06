@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "OO",
+    "OO"
+  ],
+  "key": {
+    "#": "minecraft:paper",
+    "O": "minecraft:oak_planks"
+  },
+  "result": {
+    "id": "chou:cardboard",
+    "count": 4
+  }
+}

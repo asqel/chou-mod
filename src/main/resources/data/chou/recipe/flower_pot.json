@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "DDD",
+    "___"
+  ],
+  "key": {
+    "#": "minecraft:short_grass",
+    "D": "minecraft:dirt",
+    "_": "#minecraft:wooden_slabs"
+  },
+  "result": {
+    "id": "chou:flower_pot",
+    "count": 3
+  }
+}

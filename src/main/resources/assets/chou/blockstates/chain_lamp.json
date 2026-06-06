@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "chou:block/chain_lamp", "y": 0 },
+    "facing=south": { "model": "chou:block/chain_lamp", "y": 180 },
+    "facing=east": { "model": "chou:block/chain_lamp", "y": 90},
+    "facing=west": { "model": "chou:block/chain_lamp", "y": 270}
+  }
+}

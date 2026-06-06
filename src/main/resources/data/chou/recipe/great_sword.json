@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "I",
+    "i"
+  ],
+  "key": {
+    "#": "minecraft:iron_ingot",
+    "I": "minecraft:iron_block",
+    "i": "minecraft:iron_sword"
+  },
+  "result": {
+    "id": "chou:great_sword"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "L",
+    "#"
+  ],
+  "key": {
+    "#": "minecraft:string",
+    "L": "minecraft:ladder"
+  },
+  "result": {
+    "id": "chou:rope_ladder",
+    "count": 4
+  }
+}

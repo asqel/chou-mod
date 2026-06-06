@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "_D_",
+    " _ "
+  ],
+  "key": {
+    "#": "minecraft:short_grass",
+    "D": "minecraft:dirt",
+    "_": "#minecraft:wooden_slabs"
+  },
+  "result": {
+    "id": "chou:hanging_garden",
+    "count": 1
+  }
+}

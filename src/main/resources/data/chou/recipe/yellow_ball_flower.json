@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#S#",
+    " S "
+  ],
+  "key": {
+    "#": "minecraft:magenta_dye",
+    "S": "minecraft:short_grass"
+  },
+  "result": {
+    "id": "chou:yellow_ball_flower",
+    "count": 8
+  }
+}

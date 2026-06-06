@@ -1,0 +1,6 @@
+{
+    "parent": "chou:block/rope",
+    "textures": {
+        "rope_texture": "chou:block/black_rope"
+    }
+}

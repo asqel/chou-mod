@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "chou:block/plate", "y": 0 },
+    "facing=south": { "model": "chou:block/plate", "y": 180 },
+    "facing=east": { "model": "chou:block/plate", "y": 90},
+    "facing=west": { "model": "chou:block/plate", "y": 270}
+  }
+}

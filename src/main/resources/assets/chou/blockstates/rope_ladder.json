@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "chou:block/rope_ladder", "y": 0 },
+    "facing=south": { "model": "chou:block/rope_ladder", "y": 180 },
+    "facing=east": { "model": "chou:block/rope_ladder", "y": 90},
+    "facing=west": { "model": "chou:block/rope_ladder", "y": 270}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#.#",
+    "CIC",
+    " I "
+  ],
+  "key": {
+    "#": "minecraft:ink_sac",
+    ".": "minecraft:glowstone_dust",
+    "C": "minecraft:cyan_dye",
+    "I": "minecraft:iron_bars"
+  },
+  "result": {
+    "id": "chou:medusa_lamp"
+  }
+}

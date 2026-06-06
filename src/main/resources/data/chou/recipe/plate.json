@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "I.I"
+  ],
+  "key": {
+    "#": "minecraft:glass_pane",
+    ".": "minecraft:heavy_weighted_pressure_plate",
+    "I": "minecraft:iron_nugget"
+  },
+  "result": {
+    "id": "chou:plate",
+    "count": 4
+  }
+}
