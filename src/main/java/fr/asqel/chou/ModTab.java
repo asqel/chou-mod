@@ -30,6 +30,7 @@ public class ModTab {
 	            output.accept(ModItems.BLACK_ROPE);
 	            output.accept(ModItems.WHITE_ROPE);
 	            output.accept(ModItems.PLATE);
+				output.accept(ModItems.SIEVE);
 				output.accept(ModItems.WHITE_WATER_BOTTLE);
 				output.accept(ModItems.LIGHT_GRAY_WATER_BOTTLE);
 				output.accept(ModItems.GRAY_WATER_BOTTLE);

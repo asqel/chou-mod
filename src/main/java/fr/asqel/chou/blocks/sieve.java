@@ -7,20 +7,16 @@ import com.mojang.serialization.MapCodec;
 import fr.asqel.chou.ModBlocks;
 import fr.asqel.chou.blockentity.sieve_blockentity;
 import fr.asqel.chou.items.colored_bottle;
-import net.fabricmc.fabric.api.resource.v1.reloader.ResourceReloaderKeys.Server;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackLinkedSet;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -30,13 +26,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class sieve extends BaseEntityBlock {
 
     public static final int MAX_PROGRESS = 10;
-    public static final float PROGRESS_PROBA = 1;
     public static final float BREAK_PROBA = 0.03f;
 
     public sieve() {
@@ -73,15 +67,12 @@ public class sieve extends BaseEntityBlock {
             else if (to_put != 0)
                 sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() + to_put);
             player.getInventory().removeItem(new ItemStack(Items.GLASS_BOTTLE, to_put));
+            player.getInventory().clearOrCountMatchingItems(s -> {return s.getItem() == Items.GLASS_BOTTLE;}, to_put, null);
         }
         else if(sieve_ent.getItem(1).count() != 0) {
             player.getInventory().add(sieve_ent.getItem(1).copy());
-            sieve_ent.getItem(0).setCount(0);
+            sieve_ent.getItem(1).setCount(1);
         }
-
-        player.sendSystemMessage(Component.literal("slot 0: " + String.valueOf(sieve_ent.getItem(0).count())));
-        player.sendSystemMessage(Component.literal("slot 1: " + String.valueOf(sieve_ent.getItem(1).count())));
-
 
         player.swing(hand); 
         return InteractionResult.SUCCESS;
@@ -148,23 +139,19 @@ public class sieve extends BaseEntityBlock {
             return ;
         String wool_color = get_wool_color(level, wool_pos);
         ItemStack stack = sieve_ent.getItem(1);
-        System.out.println(sieve_ent.getItem(1).count());
-        System.out.println(sieve_ent.getItem(1).isEmpty());
 
         if (sieve_ent.progress == MAX_PROGRESS) {
-            if (stack.isEmpty()) {
+            if (stack.isEmpty())
                 sieve_ent.items.set(1, new ItemStack(colored_bottle.get_item_from_color(wool_color)));
-            }
-            else if (stack.getItem() == colored_bottle.get_item_from_color(wool_color)) {
-                System.out.println("AAAAAAAAAAAAAaaa");
-                sieve_ent.items.set(1, new ItemStack(colored_bottle.get_item_from_color(wool_color), sieve_ent.getItem(1).count()));
-                System.out.println("AAAAAA" +  String.valueOf(sieve_ent.getItem(1).count()));
-            }
+            else if (stack.getItem() == colored_bottle.get_item_from_color(wool_color))
+                sieve_ent.getItem(1).setCount(sieve_ent.getItem(1).count() + 1);
             else
                 return ;
             sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() - 1);
+            sieve_ent.progress = 0;
+            if (random.nextFloat() < BREAK_PROBA)
+                level.setBlock(wool_pos, Blocks.WHITE_WOOL.defaultBlockState(), UPDATE_ALL);
         }
-
         sieve_ent.progress++;
     }
 }
