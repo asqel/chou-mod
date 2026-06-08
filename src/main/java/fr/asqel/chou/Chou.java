@@ -24,5 +24,6 @@ public class Chou implements ModInitializer {
 		ModBlocks.initialize();
 		ModItems.initialize();
 		ModTab.initialize();
+		ModFeatures.initialize();
 	}
 }
