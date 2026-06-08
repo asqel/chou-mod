@@ -38,6 +38,7 @@ public class ModItems {
 	public static final Item WHITE_ROPE = register_block("white_rope", ModBlocks.WHITE_ROPE);
 	public static final Item PLATE = register_block("plate", ModBlocks.PLATE);
 	public static final Item SIEVE = register_block("sieve", ModBlocks.SIEVE);
+	public static final Item STARFISH_FLOWER = register_block("starfish_flower", ModBlocks.STARFISH_FLOWER);
 
 	public static final Item WHITE_WATER_BOTTLE = register("white_water_bottle", () -> {return new colored_bottle("white");});
 	public static final Item LIGHT_GRAY_WATER_BOTTLE = register("light_gray_water_bottle", () -> {return new colored_bottle("light_gray");});

@@ -28,7 +28,7 @@ public class hanging_garden extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public hanging_garden() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("hanging_garden")).sound(SoundType.WOOD).noOcclusion());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("hanging_garden")).sound(SoundType.WOOD).noOcclusion().strength(1.5f));
 		this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
     }
 

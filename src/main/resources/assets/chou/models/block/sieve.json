@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "chou:block/sieve_bottle",
+		"1": "#bottle",
 		"2": "chou:block/sieve_up",
 		"particle": "chou:block/sieve_up"
 	},

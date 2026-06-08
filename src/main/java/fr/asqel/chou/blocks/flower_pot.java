@@ -24,7 +24,7 @@ public class flower_pot extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public flower_pot() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("flower_pot")).sound(SoundType.WOOD).noOcclusion());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("flower_pot")).sound(SoundType.WOOD).noOcclusion().strength(1.5f));
 		this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
     }
 

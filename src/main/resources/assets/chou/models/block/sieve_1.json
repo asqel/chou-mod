@@ -1,0 +1,6 @@
+{
+    "parent": "chou:block/sieve",
+    "textures": {
+        "bottle": "chou:block/sieve_bottle"
+    }
+}

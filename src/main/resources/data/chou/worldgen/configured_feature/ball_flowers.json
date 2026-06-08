@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "chou:magenta_ball_flower"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "chou:yellow_ball_flower"
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

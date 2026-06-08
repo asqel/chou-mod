@@ -28,7 +28,7 @@ public class chain_lamp extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public chain_lamp() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("chain_lamp")).sound(SoundType.IRON).lightLevel((n) -> {return 15;}).noOcclusion());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("chain_lamp")).sound(SoundType.IRON).strength(3.5f).lightLevel((n) -> {return 15;}).noOcclusion());
 		this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
     }
     @Override

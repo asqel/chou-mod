@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 public class rope_ladder extends LadderBlock {
 
     public rope_ladder() {
-        super(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).setId(ModBlocks.keyOfBlock("medusa_lamp")).noOcclusion().forceSolidOff());
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).setId(ModBlocks.keyOfBlock("rope_ladder")).noOcclusion().forceSolidOff());
     }
 
     private boolean canAttachTo(final BlockGetter level, final BlockPos pos, final Direction direction) {

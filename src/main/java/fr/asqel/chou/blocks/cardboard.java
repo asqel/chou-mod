@@ -21,7 +21,7 @@ public class cardboard extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public cardboard() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("cardboard")).sound(SoundType.WOOD).noOcclusion());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("cardboard")).sound(SoundType.WOOD).noOcclusion().strength(2.0f));
 		this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
     }
 

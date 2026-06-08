@@ -14,7 +14,7 @@ public class medusa_lamp extends Block{
 
     public static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 16, 12);
     public medusa_lamp() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("medusa_lamp")).sound(SoundType.SPONGE).lightLevel((n) -> {return 15;}).noOcclusion().forceSolidOff());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("medusa_lamp")).strength(1.5f).sound(SoundType.SPONGE).lightLevel((n) -> {return 15;}).noOcclusion().forceSolidOff());
     }
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

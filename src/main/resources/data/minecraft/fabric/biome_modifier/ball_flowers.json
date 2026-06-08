@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:add_features",
+  "biomes": "minecraft:plains",
+  "features": "chou:ball_flowers_placed",
+  "step": "vegetal_decoration"
+}

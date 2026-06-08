@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "chou:block/sieve"
+    "has_bottle=false": {
+      "model": "chou:block/sieve_0"
+    },
+    "has_bottle=true": {
+      "model": "chou:block/sieve_1"
     }
   }
 }

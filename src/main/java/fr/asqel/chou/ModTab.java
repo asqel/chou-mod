@@ -22,8 +22,9 @@ public class ModTab {
 	            output.accept(ModItems.MEDUSA_LAMP);
 	            output.accept(ModItems.ROPE_LADDER);
 	            output.accept(ModItems.CHAIN_LAMP);
-	            output.accept(ModItems.YELLOW_BALL_FLOWER);
 	            output.accept(ModItems.MAGENTA_BALL_FLOWER);
+	            output.accept(ModItems.YELLOW_BALL_FLOWER);
+				output.accept(ModItems.STARFISH_FLOWER);
 	            output.accept(ModItems.FLOWER_POT);
 	            output.accept(ModItems.HANGING_GARDEN);
 	            output.accept(ModItems.CARDBOARD);

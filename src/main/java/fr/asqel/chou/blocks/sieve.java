@@ -8,7 +8,6 @@ import fr.asqel.chou.ModBlocks;
 import fr.asqel.chou.blockentity.sieve_blockentity;
 import fr.asqel.chou.items.colored_bottle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -18,27 +17,43 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class sieve extends BaseEntityBlock {
 
     public static final int MAX_PROGRESS = 10;
     public static final float BREAK_PROBA = 0.03f;
+    public static final BooleanProperty HAS_BOTTLE = BooleanProperty.create("has_bottle");
 
     public sieve() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("sieve")).sound(SoundType.WOOD).noOcclusion().randomTicks());
+        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("sieve")).sound(SoundType.WOOD).strength(2f).noOcclusion().randomTicks());
+        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false));
     }
 
     public sieve(Properties pr) {
         super(pr);
+        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+        builder.add(HAS_BOTTLE);
+    }
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(HAS_BOTTLE, false);
     }
 
     @Override
@@ -69,10 +84,17 @@ public class sieve extends BaseEntityBlock {
             player.getInventory().removeItem(new ItemStack(Items.GLASS_BOTTLE, to_put));
             player.getInventory().clearOrCountMatchingItems(s -> {return s.getItem() == Items.GLASS_BOTTLE;}, to_put, null);
         }
-        else if(sieve_ent.getItem(1).count() != 0) {
-            player.getInventory().add(sieve_ent.getItem(1).copy());
-            sieve_ent.getItem(1).setCount(1);
+        else if(sieve_ent.getItem(1).count() != 0 && player.getItemInHand(hand).isEmpty()) {
+            ItemStack s = sieve_ent.getItem(1).copy();
+            if (!player.getInventory().add(s)) {
+                player.drop(s, false, false);
+            }
+            sieve_ent.getItem(1).setCount(0);
         }
+        else
+            return InteractionResult.PASS;
+        
+        level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), UPDATE_ALL);
 
         player.swing(hand); 
         return InteractionResult.SUCCESS;
@@ -152,6 +174,7 @@ public class sieve extends BaseEntityBlock {
             if (random.nextFloat() < BREAK_PROBA)
                 level.setBlock(wool_pos, Blocks.WHITE_WOOL.defaultBlockState(), UPDATE_ALL);
         }
+        level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), UPDATE_ALL);
         sieve_ent.progress++;
     }
 }
