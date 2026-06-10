@@ -49,7 +49,7 @@ public class ModTab {
 				output.accept(ModItems.MAGENTA_WATER_BOTTLE);
 				output.accept(ModItems.PINK_WATER_BOTTLE);
 
-				output.accept(ModItems.WHITE_COLORED_BRUSH);
+				output.accept(ModItems.COLORED_BRUSH);
 
 
     		})

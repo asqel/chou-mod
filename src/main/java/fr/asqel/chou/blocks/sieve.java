@@ -81,7 +81,6 @@ public class sieve extends BaseEntityBlock {
                 sieve_ent.setItem(0, new ItemStack(Items.GLASS_BOTTLE, to_put));
             else if (to_put != 0)
                 sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() + to_put);
-            player.getInventory().removeItem(new ItemStack(Items.GLASS_BOTTLE, to_put));
             player.getInventory().clearOrCountMatchingItems(s -> {return s.getItem() == Items.GLASS_BOTTLE;}, to_put, null);
         }
         else if(sieve_ent.getItem(1).count() != 0 && player.getItemInHand(hand).isEmpty()) {
@@ -110,7 +109,6 @@ public class sieve extends BaseEntityBlock {
             super.spawnAfterBreak(state, level, pos, tool, dropExperience);
             return ;
         }
-
         level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(0)));
         level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(1)));
         sieve_ent.getItem(0).setCount(0);

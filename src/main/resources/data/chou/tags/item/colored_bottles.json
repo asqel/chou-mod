@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "chou:white_water_bottle",
+        "chou:light_gray_water_bottle",
+        "chou:gray_water_bottle",
+        "chou:black_water_bottle",
+        "chou:brown_water_bottle",
+        "chou:red_water_bottle",
+        "chou:orange_water_bottle",
+        "chou:yellow_water_bottle",
+        "chou:lime_water_bottle",
+        "chou:green_water_bottle",
+        "chou:cyan_water_bottle",
+        "chou:light_blue_water_bottle",
+        "chou:blue_water_bottle",
+        "chou:purple_water_bottle",
+        "chou:magenta_water_bottle",
+        "chou:pink_water_bottle"
+  ]
+}

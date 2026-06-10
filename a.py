@@ -16,7 +16,6 @@ colors = [
 "Magenta", 
 "Pink",
 ]
-
 for i in colors:
 	c = i.lower()
 	print(f"""public static final Item {c.upper()}_WATER_BOTTLE = register("{c}_water_bottle", () -> {{return new colored_bottle("{c}");}});""")
@@ -53,6 +52,10 @@ for i in colors:
 #}}
 #""")
 
+#for i in colors:
+#	c = i.lower()
+#	print(f""""iten.chou.{c}_water_bottle": "{i.replace('_', '')} Water Bottle",""")
+
 for i in colors:
 	c = i.lower()
-	print(f""""iten.chou.{c}_water_bottle": "{i.replace('_', '')} Water Bottle",""")
+	print(f""""{c}_colored_brush",""")

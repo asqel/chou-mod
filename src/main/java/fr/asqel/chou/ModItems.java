@@ -58,7 +58,7 @@ public class ModItems {
 	public static final Item MAGENTA_WATER_BOTTLE = register("magenta_water_bottle", () -> {return new colored_bottle("magenta");});
 	public static final Item PINK_WATER_BOTTLE = register("pink_water_bottle", () -> {return new colored_bottle("pink");});
 
-	public static final Item WHITE_COLORED_BRUSH = register("white_colored_brush", () -> {return new colored_brush("white");});
+	public static final Item COLORED_BRUSH = register("colored_brush", () -> {return new colored_brush();});
 
 
 	public static ResourceKey<Item> keyOfItem(String name) {
