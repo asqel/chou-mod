@@ -49,6 +49,8 @@ public class ModTab {
 				output.accept(ModItems.MAGENTA_WATER_BOTTLE);
 				output.accept(ModItems.PINK_WATER_BOTTLE);
 
+				output.accept(ModItems.WHITE_COLORED_BRUSH);
+
 
     		})
     		.build();

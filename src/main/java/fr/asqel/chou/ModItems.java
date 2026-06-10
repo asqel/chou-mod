@@ -3,6 +3,7 @@ package fr.asqel.chou;
 import com.google.common.base.Supplier;
 
 import fr.asqel.chou.items.colored_bottle;
+import fr.asqel.chou.items.colored_brush;
 import fr.asqel.chou.items.great_sword;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -56,6 +57,8 @@ public class ModItems {
 	public static final Item PURPLE_WATER_BOTTLE = register("purple_water_bottle", () -> {return new colored_bottle("purple");});
 	public static final Item MAGENTA_WATER_BOTTLE = register("magenta_water_bottle", () -> {return new colored_bottle("magenta");});
 	public static final Item PINK_WATER_BOTTLE = register("pink_water_bottle", () -> {return new colored_bottle("pink");});
+
+	public static final Item WHITE_COLORED_BRUSH = register("white_colored_brush", () -> {return new colored_brush("white");});
 
 
 	public static ResourceKey<Item> keyOfItem(String name) {

@@ -48,6 +48,7 @@ public class ModBlocks {
 	public static final Block STARFISH_FLOWER = register("starfish_flower", starfish_flower::new);
 	public static final Block YELLOW_BALL_FLOWER_POTTED = register("yellow_ball_flower_potted", () -> {return new FlowerPotBlock(YELLOW_BALL_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("yellow_ball_flower_potted")));});
 	public static final Block MAGENTA_BALL_FLOWER_POTTED = register("magenta_ball_flower_potted", () -> {return new FlowerPotBlock(MAGENTA_BALL_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("magenta_ball_flower_potted")));});
+	public static final Block STARFISH_FLOWER_POTTED = register("starfish_flower_potted", () -> {return new FlowerPotBlock(STARFISH_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("starfish_flower_potted")));});
 
 	public static ResourceKey<Block> keyOfBlock(String name) {
 		return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Chou.MOD_ID, name));
