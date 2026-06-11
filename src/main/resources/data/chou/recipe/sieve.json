@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PSP",
+    "THT",
+    "T T"
+  ],
+  "key": {
+    "H": "minecraft:hopper",
+    "S": "minecraft:string",
+    "P": "#minecraft:planks",
+    "T": "minecraft:stick"
+  },
+  "result": {
+    "id": "chou:sieve",
+    "count": 1
+  }
+}

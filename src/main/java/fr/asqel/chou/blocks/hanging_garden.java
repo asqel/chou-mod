@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class hanging_garden extends Block {
@@ -29,7 +28,7 @@ public class hanging_garden extends Block {
 
     public hanging_garden() {
         super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("hanging_garden")).sound(SoundType.WOOD).noOcclusion().strength(1.5f));
-		this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override

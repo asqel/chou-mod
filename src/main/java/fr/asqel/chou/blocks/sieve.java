@@ -8,6 +8,7 @@ import fr.asqel.chou.ModBlocks;
 import fr.asqel.chou.blockentity.sieve_blockentity;
 import fr.asqel.chou.items.colored_bottle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class sieve extends BaseEntityBlock {
@@ -36,24 +39,26 @@ public class sieve extends BaseEntityBlock {
     public static final int MAX_PROGRESS = 10;
     public static final float BREAK_PROBA = 0.03f;
     public static final BooleanProperty HAS_BOTTLE = BooleanProperty.create("has_bottle");
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public sieve() {
         super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("sieve")).sound(SoundType.WOOD).strength(2f).noOcclusion().randomTicks());
-        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false).setValue(FACING, Direction.NORTH));
     }
+
 
     public sieve(Properties pr) {
         super(pr);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false).setValue(FACING, Direction.NORTH));
     }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-        builder.add(HAS_BOTTLE);
+        builder.add(HAS_BOTTLE).add(FACING);
     }
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(HAS_BOTTLE, false);
+        return this.defaultBlockState().setValue(HAS_BOTTLE, false).setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
@@ -82,6 +87,7 @@ public class sieve extends BaseEntityBlock {
             else if (to_put != 0)
                 sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() + to_put);
             player.getInventory().clearOrCountMatchingItems(s -> {return s.getItem() == Items.GLASS_BOTTLE;}, to_put, null);
+            level.setBlock(pos, state.setValue(HAS_BOTTLE, to_put != 0), UPDATE_ALL);
         }
         else if(sieve_ent.getItem(1).count() != 0 && player.getItemInHand(hand).isEmpty()) {
             ItemStack s = sieve_ent.getItem(1).copy();
@@ -93,7 +99,6 @@ public class sieve extends BaseEntityBlock {
         else
             return InteractionResult.PASS;
         
-        level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), UPDATE_ALL);
 
         player.swing(hand); 
         return InteractionResult.SUCCESS;

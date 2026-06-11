@@ -29,5 +29,25 @@
     "item.chou.blue_water_bottle": "Blue Water Bottle",
     "item.chou.purple_water_bottle": "Purple Water Bottle",
     "item.chou.magenta_water_bottle": "Magenta Water Bottle",
-    "item.chou.pink_water_bottle": "Pink Water Bottle"
+    "item.chou.pink_water_bottle": "Pink Water Bottle",
+    "block.chou.chair": "Chair",
+    "item.chou.colored_brush": "Brush",
+    "tooltip.chou.brush.0": "White",
+    "tooltip.chou.brush.1": "Light Gray",
+    "tooltip.chou.brush.2": "Gray",
+    "tooltip.chou.brush.3": "Black",
+    "tooltip.chou.brush.4": "Brown",
+    "tooltip.chou.brush.5": "Red",
+    "tooltip.chou.brush.6": "Orange",
+    "tooltip.chou.brush.7": "Yellow",
+    "tooltip.chou.brush.8": "Lime",
+    "tooltip.chou.brush.9": "Green",
+    "tooltip.chou.brush.10": "Cyan",
+    "tooltip.chou.brush.11": "Light Blue",
+    "tooltip.chou.brush.12": "Blue",
+    "tooltip.chou.brush.13": "Purple",
+    "tooltip.chou.brush.14": "Magenta",
+    "tooltip.chou.brush.15": "Pink",
+    "tooltip.chou.brush.None": "None"
+
 }

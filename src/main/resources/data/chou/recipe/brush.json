@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "E",
+    "S"
+  ],
+  "key": {
+    "F": "minecraft:feather",
+    "E": "minecraft:emerald",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "chou:colored_brush",
+    "count": 1
+  }
+}

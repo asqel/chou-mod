@@ -61,6 +61,7 @@ public class ModItems {
 	public static final Item PINK_WATER_BOTTLE = register("pink_water_bottle", () -> {return new colored_bottle("pink");});
 
 	public static final Item COLORED_BRUSH = register("colored_brush", () -> {return new colored_brush();});
+	public static final Item CHAIR = register_block("chair", ModBlocks.CHAIR);
 
 
 	public static ResourceKey<Item> keyOfItem(String name) {

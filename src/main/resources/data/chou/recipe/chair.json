@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#",
-    "D",
-    "_"
+    "  S",
+    "_H_",
+    "S S"
   ],
   "key": {
-    "#": "minecraft:short_grass",
-    "D": "minecraft:dirt",
+    "S": "minecraft:stick",
+    "H": "minecraft:hay_block",
     "_": "#minecraft:wooden_slabs"
   },
   "result": {
-    "id": "chou:flower_pot",
+    "id": "chou:chair",
     "count": 1
   }
 }

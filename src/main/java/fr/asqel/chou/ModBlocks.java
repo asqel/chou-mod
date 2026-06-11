@@ -3,6 +3,7 @@ package fr.asqel.chou;
 import java.util.function.Supplier;
 
 import fr.asqel.chou.blocks.chain_lamp;
+import fr.asqel.chou.blocks.chair;
 import fr.asqel.chou.blocks.flower_pot;
 import fr.asqel.chou.blocks.medusa_lamp;
 import fr.asqel.chou.blocks.plate;
@@ -21,7 +22,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 
 public class ModBlocks {
@@ -49,6 +49,8 @@ public class ModBlocks {
 	public static final Block YELLOW_BALL_FLOWER_POTTED = register("yellow_ball_flower_potted", () -> {return new FlowerPotBlock(YELLOW_BALL_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("yellow_ball_flower_potted")));});
 	public static final Block MAGENTA_BALL_FLOWER_POTTED = register("magenta_ball_flower_potted", () -> {return new FlowerPotBlock(MAGENTA_BALL_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("magenta_ball_flower_potted")));});
 	public static final Block STARFISH_FLOWER_POTTED = register("starfish_flower_potted", () -> {return new FlowerPotBlock(STARFISH_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("starfish_flower_potted")));});
+
+	public static final Block CHAIR = register("chair", chair::new);
 
 	public static ResourceKey<Block> keyOfBlock(String name) {
 		return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Chou.MOD_ID, name));

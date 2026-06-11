@@ -54,9 +54,11 @@ public class ModTab {
 				output.accept(ModItems.COLORED_BRUSH);
 				for (int i = 0; i < 16; i++) {
 					ItemStack stack = new ItemStack(ModItems.COLORED_BRUSH);
-					stack.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, 0).set(DataComponents.DAMAGE, 0).build());
+					stack.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, i).set(DataComponents.DAMAGE, 0).build());
 					output.accept(stack);
 				}
+
+				output.accept(ModItems.CHAIR);
 
 
 

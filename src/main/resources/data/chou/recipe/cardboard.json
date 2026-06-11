@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": "minecraft:paper",
-    "O": "minecraft:oak_planks"
+    "O": "#minecraft:planks"
   },
   "result": {
     "id": "chou:cardboard",
