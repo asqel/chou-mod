@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "chou:item/orange_water_bottle"
+		"layer0": "chou:item/orange_bottle"
 	}
 }

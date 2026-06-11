@@ -2,6 +2,8 @@ package fr.asqel.chou;
 
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -50,6 +52,12 @@ public class ModTab {
 				output.accept(ModItems.PINK_WATER_BOTTLE);
 
 				output.accept(ModItems.COLORED_BRUSH);
+				for (int i = 0; i < 16; i++) {
+					ItemStack stack = new ItemStack(ModItems.COLORED_BRUSH);
+					stack.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, 0).set(DataComponents.DAMAGE, 0).build());
+					output.accept(stack);
+				}
+
 
 
     		})

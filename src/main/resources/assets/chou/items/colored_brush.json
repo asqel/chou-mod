@@ -1,0 +1,147 @@
+{
+	"model": {
+		"type": "minecraft:select",
+		"property": "minecraft:component",
+		"component": "chou:color_idx",
+		"cases": [
+			{
+				"when": -1,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/colored_brush"
+				}
+			},
+					{
+				"when": 0,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/white_colored_brush"
+				}
+			},
+
+			{
+				"when": 1,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/light_gray_colored_brush"
+				}
+			},
+
+			{
+				"when": 2,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/gray_colored_brush"
+				}
+			},
+
+			{
+				"when": 3,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/black_colored_brush"
+				}
+			},
+
+			{
+				"when": 4,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/brown_colored_brush"
+				}
+			},
+
+			{
+				"when": 5,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/red_colored_brush"
+				}
+			},
+
+			{
+				"when": 6,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/orange_colored_brush"
+				}
+			},
+
+			{
+				"when": 7,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/yellow_colored_brush"
+				}
+			},
+
+			{
+				"when": 8,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/lime_colored_brush"
+				}
+			},
+
+			{
+				"when": 9,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/green_colored_brush"
+				}
+			},
+
+			{
+				"when": 10,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/cyan_colored_brush"
+				}
+			},
+
+			{
+				"when": 11,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/light_blue_colored_brush"
+				}
+			},
+
+			{
+				"when": 12,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/blue_colored_brush"
+				}
+			},
+
+			{
+				"when": 13,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/purple_colored_brush"
+				}
+			},
+
+			{
+				"when": 14,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/magenta_colored_brush"
+				}
+			},
+
+			{
+				"when": 15,
+				"model": {
+					"type": "minecraft:model",
+					"model": "chou:item/pink_colored_brush"
+				}
+			}
+		],
+		"fallback": {
+			"type": "minecraft:model",
+			"model": "cou:item/colored_brush"
+		}
+	}
+}

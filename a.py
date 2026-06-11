@@ -30,32 +30,55 @@ for i in colors:
 	print(f"""case "{a}":
 	return ModItems.{b}_WATER_BOTTLE;""")
 
-#path = "src/main/resources/assets/chou/"
-#for i in colors:
-#	c = i.lower()
-#	with open(f"{path}/items/{c}_water_bottle.json", "w") as f:
-#		f.write(
-#f"""{{
-#  "model": {{
-#    "type": "minecraft:model",
-#    "model": "chou:item/{c}_water_bottle"
-#  }}
-#}}
-#""")
-#	with open(f"{path}/models/item/{c}_water_bottle.json", "w") as f:
-#		f.write(
-#f"""{{
-#	"parent": "minecraft:item/generated",
-#	"textures": {{
-#		"layer0": "chou:item/{c}_water_bottle"
-#	}}
-#}}
-#""")
+path = "src/main/resources/assets/chou/"
+for i in colors:
+	c = i.lower()
+	with open(f"{path}/items/{c}_water_bottle.json", "w") as f:
+		f.write(
+f"""{{
+  "model": {{
+    "type": "minecraft:model",
+    "model": "chou:item/{c}_water_bottle"
+  }}
+}}
+""")
+	with open(f"{path}/models/item/{c}_water_bottle.json", "w") as f:
+		f.write(
+f"""{{
+	"parent": "minecraft:item/generated",
+	"textures": {{
+		"layer0": "chou:item/{c}_bottle"
+	}}
+}}
+""")
 
 #for i in colors:
 #	c = i.lower()
 #	print(f""""iten.chou.{c}_water_bottle": "{i.replace('_', '')} Water Bottle",""")
 
-for i in colors:
-	c = i.lower()
-	print(f""""{c}_colored_brush",""")
+#for i in colors:
+#	c = i.lower()
+#	print(f""""{c}_colored_brush",""")
+#
+#for idx, i in enumerate(colors):
+#	c = i.lower()
+#	print(f"""	{{
+#        "when": {idx},
+#        "model": {{
+#          "type": "minecraft:model",
+#          "model": "chou:item/{c}_colored_brush"
+#        }}
+#      }},
+#""")
+#
+#
+#for i in colors:
+#	c = i.lower()
+#	with open(f"/home/asqel/git/chou-mod/src/main/resources/assets/chou/models/item/{c}_colored_brush.json", "w") as f:
+#		f.write(f"""{{
+#	"parent": "minecraft:item/generated",
+#	"textures": {{
+#		"layer0": "chou:item/{c}_brush"
+#	}}
+#}}
+#""")

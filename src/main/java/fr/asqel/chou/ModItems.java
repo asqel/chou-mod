@@ -5,6 +5,8 @@ import com.google.common.base.Supplier;
 import fr.asqel.chou.items.colored_bottle;
 import fr.asqel.chou.items.colored_brush;
 import fr.asqel.chou.items.great_sword;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.event.player.ItemEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

@@ -1,19 +1,24 @@
 package fr.asqel.chou.items;
 
+import java.util.function.Consumer;
+
 import fr.asqel.chou.ModComponent;
 import fr.asqel.chou.ModItems;
-import fr.asqel.chou.ModTab;
 import fr.asqel.chou.ModTags;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class colored_brush extends Item {
     public static final int MAX_DURA = 256;
@@ -79,6 +84,8 @@ public class colored_brush extends Item {
         System.out.println(current_dura);
         if (current_dura <= 0)
             return InteractionResult.PASS;
+        if (current_dura == MAX_DURA)
+            brush.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, -1).build());
         if (brush.getComponents().get(ModComponent.COLOR_IDX) == -1)
             brush.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, get_color(bottle.getItem())).build());
         if (brush.getComponents().get(ModComponent.COLOR_IDX) != get_color(bottle.getItem()))
@@ -101,6 +108,6 @@ public class colored_brush extends Item {
     }
 
     public static Block get_wool(Integer color) {
-
+        return null;
     }
 }
