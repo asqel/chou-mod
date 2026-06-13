@@ -86,3 +86,38 @@ colors = [
 for idx, i in enumerate(colors):
 	c = i.lower()
 	print(f""""tooltip.chou.brush.{idx}": "{i.replace('_', ' ')}",""")
+
+types = [
+	"WOOL",
+	"CARPET",
+	"TERRACOTTA",
+	"CONCRETE",
+	"CONCRETE_POWDER",
+	"STAINED_GLASS",
+	"STAINED_GLASS_PANE",
+	"CANDLE"
+]
+
+for elem in types:
+	file = f"""package fr.asqel.chou.utils;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
+public class {elem.lower()} {{
+	public static Block from_color(int color) {{
+		switch (color) {{
+"""
+	for idx in range(len(colors)):
+		file += f"""\t\t\tcase {idx}:
+\t\t\t\treturn Blocks.{colors[idx].upper()}_{elem};
+"""
+
+	file += f"""\t\t\tdefault:
+				return Blocks.WHITE_{elem};
+		}}
+	}}
+}}
+"""
+	with open(f"/home/asqel/git/chou-mod/src/main/java/fr/asqel/chou/utils/{elem.lower()}.java", "w") as f:
+		f.write(file)

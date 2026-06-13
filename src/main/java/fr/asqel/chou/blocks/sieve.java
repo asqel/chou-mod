@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -80,13 +81,13 @@ public class sieve extends BaseEntityBlock {
 	    }
 
         if (player.getItemInHand(hand).getItem() == Items.GLASS_BOTTLE) {
-            int to_put = Math.min(64 - sieve_ent.getItem(0).count(), player.getInventory().countItem(Items.GLASS_BOTTLE));
+            int to_put = Math.min(64 - sieve_ent.getItem(0).count(), player.getItemInHand(hand).count());
 
             if (sieve_ent.getItem(0).isEmpty() && to_put != 0)
                 sieve_ent.setItem(0, new ItemStack(Items.GLASS_BOTTLE, to_put));
             else if (to_put != 0)
                 sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() + to_put);
-            player.getInventory().clearOrCountMatchingItems(s -> {return s.getItem() == Items.GLASS_BOTTLE;}, to_put, null);
+            player.getItemInHand(hand).shrink(to_put);
             level.setBlock(pos, state.setValue(HAS_BOTTLE, to_put != 0), UPDATE_ALL);
         }
         else if(sieve_ent.getItem(1).count() != 0 && player.getItemInHand(hand).isEmpty()) {
@@ -175,9 +176,9 @@ public class sieve extends BaseEntityBlock {
             sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() - 1);
             sieve_ent.progress = 0;
             if (random.nextFloat() < BREAK_PROBA)
-                level.setBlock(wool_pos, Blocks.WHITE_WOOL.defaultBlockState(), UPDATE_ALL);
+                level.setBlock(wool_pos, Blocks.WHITE_WOOL.defaultBlockState(), Block.UPDATE_ALL);
         }
-        level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), UPDATE_ALL);
+        level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), Block.UPDATE_ALL);
         sieve_ent.progress++;
     }
 }

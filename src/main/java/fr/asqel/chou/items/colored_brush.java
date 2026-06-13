@@ -1,27 +1,52 @@
 package fr.asqel.chou.items;
 
-import java.util.function.Consumer;
+import java.util.function.IntFunction;
 
 import fr.asqel.chou.ModComponent;
 import fr.asqel.chou.ModItems;
 import fr.asqel.chou.ModTags;
-import net.minecraft.ChatFormatting;
+import fr.asqel.chou.utils.candle;
+import fr.asqel.chou.utils.carpet;
+import fr.asqel.chou.utils.concrete;
+import fr.asqel.chou.utils.concrete_powder;
+import fr.asqel.chou.utils.stained_glass;
+import fr.asqel.chou.utils.stained_glass_pane;
+import fr.asqel.chou.utils.terracotta;
+import fr.asqel.chou.utils.wool;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class colored_brush extends Item {
     public static final int MAX_DURA = 256;
+    public static final String[] color_names = {
+            "white",
+            "light_gray",
+            "gray",
+            "black",
+            "brown",
+            "red",
+            "orange",
+            "yellow",
+            "lime",
+            "green",
+            "cyan",
+            "light_blue",
+            "blue",
+            "purple",
+            "magenta",
+            "pink"
+    };
 
     public colored_brush() {
         super(new Properties().stacksTo(1).setId(ModItems.keyOfItem("colored_brush")).durability(MAX_DURA).component(DataComponents.DAMAGE, MAX_DURA).component(ModComponent.COLOR_IDX, -1));
@@ -99,12 +124,46 @@ public class colored_brush extends Item {
         player.swing(hand);
         return InteractionResult.PASS;
     }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         if (context.getLevel().isClientSide())
             return InteractionResult.PASS;
-        // !TODO color block
-        return super.useOn(context);
+        ItemStack hand = context.getItemInHand();
+        if (hand.getItem() != ModItems.COLORED_BRUSH)
+            return InteractionResult.PASS;
+        if (hand.getComponents().get(DataComponents.DAMAGE) >= MAX_DURA)
+            return InteractionResult.PASS;
+        int color = hand.getComponents().get(ModComponent.COLOR_IDX);
+        BlockState current_state = context.getLevel().getBlockState(context.getClickedPos());
+        final Block to_replace;
+
+        if (current_state.is(BlockTags.CANDLES))
+            to_replace = candle.from_color(color);
+        else if (current_state.is(BlockTags.WOOL_CARPETS))
+            to_replace = carpet.from_color(color);
+        else if (current_state.is(BlockTags.CONCRETE_POWDER))
+            to_replace = concrete_powder.from_color(color);
+        else if (current_state.is(ModTags.CONCRETES))
+            to_replace = concrete.from_color(color);
+        else if (current_state.is(ModTags.GLASS_PANE))
+            to_replace = stained_glass_pane.from_color(color);
+        else if (current_state.is(ModTags.GLASS))
+            to_replace = stained_glass.from_color(color);
+        else if (current_state.is(BlockTags.TERRACOTTA))
+            to_replace = terracotta.from_color(color);
+        else if (current_state.is(BlockTags.WOOL))
+            to_replace = wool.from_color(color);
+        else
+            return InteractionResult.FAIL;
+        BlockState new_state = to_replace.withPropertiesOf(current_state);
+        context.getLevel().setBlock(context.getClickedPos(), new_state, Block.UPDATE_ALL);
+        hand.applyComponents(DataComponentPatch.builder().set(DataComponents.DAMAGE, hand.getComponents().get(DataComponents.DAMAGE) + 1).build());
+        if (hand.getComponents().get(DataComponents.DAMAGE) >= MAX_DURA)
+            hand.applyComponents(DataComponentPatch.builder().set(ModComponent.COLOR_IDX, -1).build());
+
+        context.getPlayer().swing(InteractionHand.MAIN_HAND);
+        return InteractionResult.SUCCESS;
     }
 
     public static Block get_wool(Integer color) {
