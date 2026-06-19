@@ -1,9 +1,13 @@
 package fr.asqel.chou.client;
 
 import fr.asqel.chou.ModComponent;
+import fr.asqel.chou.ModEntities;
 import fr.asqel.chou.ModItems;
+import fr.asqel.chou.client.renderers.canoe_renderer;
+import fr.asqel.chou.client.renderers.chair_renderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 
 public class ChouClient implements ClientModInitializer {
@@ -23,5 +27,8 @@ public class ChouClient implements ClientModInitializer {
 
         }
 		);	
+		ModEntityModelLayers.registerModelLayers();
+		EntityRenderers.register(ModEntities.CHAIR, chair_renderer::new);
+		EntityRenderers.register(ModEntities.CANOE, canoe_renderer::new);
 	}
 }

@@ -9,5 +9,4 @@ public class great_sword extends Item {
     public great_sword() {
         super(new Properties().sword(ToolMaterial.IRON, 5, -2.7f).setId(ModItems.keyOfItem("great_sword")).durability(2000));
     }
-    
 }

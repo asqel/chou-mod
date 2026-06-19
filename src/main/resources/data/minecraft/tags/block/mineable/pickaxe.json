@@ -2,6 +2,7 @@
 {
   "replace": false,
   "values": [
-    "chou:chain_lamp"
+    "chou:chain_lamp",
+    "chou:crt_tv"
   ]
 }

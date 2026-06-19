@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "chou:yellow_ball_flower"
+  ],
+  "result": {
+    "id": "minecraft:yellow_dye"
+  }
+}

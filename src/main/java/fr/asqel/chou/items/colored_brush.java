@@ -1,30 +1,21 @@
 package fr.asqel.chou.items;
 
-import java.util.function.IntFunction;
-
 import fr.asqel.chou.ModComponent;
 import fr.asqel.chou.ModItems;
 import fr.asqel.chou.ModTags;
-import fr.asqel.chou.utils.candle;
-import fr.asqel.chou.utils.carpet;
-import fr.asqel.chou.utils.concrete;
-import fr.asqel.chou.utils.concrete_powder;
-import fr.asqel.chou.utils.stained_glass;
-import fr.asqel.chou.utils.stained_glass_pane;
-import fr.asqel.chou.utils.terracotta;
-import fr.asqel.chou.utils.wool;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class colored_brush extends Item {
@@ -125,6 +116,10 @@ public class colored_brush extends Item {
         return InteractionResult.PASS;
     }
 
+    public static DyeColor idx_to_dye(int color) {
+        return DyeColor.valueOf(color_names[color].toUpperCase());
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         if (context.getLevel().isClientSide())
@@ -137,23 +132,24 @@ public class colored_brush extends Item {
         int color = hand.getComponents().get(ModComponent.COLOR_IDX);
         BlockState current_state = context.getLevel().getBlockState(context.getClickedPos());
         final Block to_replace;
+        DyeColor color_dye = idx_to_dye(color);
 
         if (current_state.is(BlockTags.CANDLES))
-            to_replace = candle.from_color(color);
+            to_replace = Blocks.DYED_CANDLE.pick(color_dye);
         else if (current_state.is(BlockTags.WOOL_CARPETS))
-            to_replace = carpet.from_color(color);
-        else if (current_state.is(BlockTags.CONCRETE_POWDER))
-            to_replace = concrete_powder.from_color(color);
+            to_replace = Blocks.CARPET.pick(color_dye);
+        else if (current_state.is(BlockTags.CONCRETE_POWDERS))
+            to_replace = Blocks.CONCRETE_POWDER.pick(color_dye);
         else if (current_state.is(ModTags.CONCRETES))
-            to_replace = concrete.from_color(color);
+            to_replace = Blocks.CONCRETE.pick(color_dye);
         else if (current_state.is(ModTags.GLASS_PANE))
-            to_replace = stained_glass_pane.from_color(color);
+            to_replace = Blocks.STAINED_GLASS_PANE.pick(color_dye);
         else if (current_state.is(ModTags.GLASS))
-            to_replace = stained_glass.from_color(color);
+            to_replace = Blocks.STAINED_GLASS.pick(color_dye);
         else if (current_state.is(BlockTags.TERRACOTTA))
-            to_replace = terracotta.from_color(color);
+            to_replace = Blocks.DYED_TERRACOTTA.pick(color_dye);
         else if (current_state.is(BlockTags.WOOL))
-            to_replace = wool.from_color(color);
+            to_replace = Blocks.WOOL.pick(color_dye);
         else
             return InteractionResult.FAIL;
         BlockState new_state = to_replace.withPropertiesOf(current_state);

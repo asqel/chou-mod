@@ -135,7 +135,7 @@ public class sieve extends BaseEntityBlock {
         BlockState state = level.getBlockState(pos);
         if (!state.is(BlockTags.WOOL))
             return false;
-        if (!white_allowed && state.getBlock() == Blocks.WHITE_WOOL)
+        if (!white_allowed && state.getBlock() == Blocks.WOOL.white())
             return false;
         return true;
     }
@@ -176,7 +176,7 @@ public class sieve extends BaseEntityBlock {
             sieve_ent.getItem(0).setCount(sieve_ent.getItem(0).count() - 1);
             sieve_ent.progress = 0;
             if (random.nextFloat() < BREAK_PROBA)
-                level.setBlock(wool_pos, Blocks.WHITE_WOOL.defaultBlockState(), Block.UPDATE_ALL);
+                level.setBlock(wool_pos, Blocks.WOOL.white().defaultBlockState(), Block.UPDATE_ALL);
         }
         level.setBlock(pos, state.setValue(HAS_BOTTLE, !sieve_ent.getItem(0).isEmpty()), Block.UPDATE_ALL);
         sieve_ent.progress++;

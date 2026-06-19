@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/ /",
+    "#T#",
+    "###"
+  ],
+  "key": {
+    "/": "minecraft:lightning_rod",
+    "#": "minecraft:iron_ingot",
+    "T": "minecraft:tinted_glass"
+  },
+  "result": {
+    "id": "chou:crt_tv"
+  }
+}

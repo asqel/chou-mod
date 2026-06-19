@@ -48,6 +48,7 @@
     "tooltip.chou.brush.13": "Purple",
     "tooltip.chou.brush.14": "Magenta",
     "tooltip.chou.brush.15": "Pink",
-    "tooltip.chou.brush.None": "None"
+    "tooltip.chou.brush.None": "None",
+    "block.chou.crt_tv": "CRT TV"
 
 }

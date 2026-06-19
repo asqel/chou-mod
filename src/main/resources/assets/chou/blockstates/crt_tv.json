@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "chou:block/crt_tv", "y": 0 },
+    "facing=south": { "model": "chou:block/crt_tv", "y": 180 },
+    "facing=east": { "model": "chou:block/crt_tv", "y": 90},
+    "facing=west": { "model": "chou:block/crt_tv", "y": 270}
+  }
+}

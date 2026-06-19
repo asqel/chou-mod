@@ -62,6 +62,7 @@ public class ModItems {
 
 	public static final Item COLORED_BRUSH = register("colored_brush", () -> {return new colored_brush();});
 	public static final Item CHAIR = register_block("chair", ModBlocks.CHAIR);
+	public static final Item CRT_TV = register_block("crt_tv", ModBlocks.CRT_TV);
 
 
 	public static ResourceKey<Item> keyOfItem(String name) {
