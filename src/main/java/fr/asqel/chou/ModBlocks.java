@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import fr.asqel.chou.blocks.chain_lamp;
 import fr.asqel.chou.blocks.chair;
+import fr.asqel.chou.blocks.computer;
 import fr.asqel.chou.blocks.flower_pot;
 import fr.asqel.chou.blocks.medusa_lamp;
 import fr.asqel.chou.blocks.plate;
@@ -51,6 +52,7 @@ public class ModBlocks {
 	public static final Block STARFISH_FLOWER_POTTED = register("starfish_flower_potted", () -> {return new FlowerPotBlock(STARFISH_FLOWER, Blocks.flowerPotProperties().setId(keyOfBlock("starfish_flower_potted")));});
 
 	public static final Block CHAIR = register("chair", chair::new);
+	public static final Block COMPUTER = register("computer", computer::new);
 
 	public static ResourceKey<Block> keyOfBlock(String name) {
 		return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Chou.MOD_ID, name));
