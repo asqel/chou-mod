@@ -1,5 +1,6 @@
 package fr.asqel.chou;
 
+import fr.asqel.chou.blockentity.computer_blockentity;
 import fr.asqel.chou.blockentity.sieve_blockentity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 public class ModBlockEntities {
 
 	public static final BlockEntityType<sieve_blockentity> SIEVE_BLOCK_ENTITY = register("sieve", sieve_blockentity::new, ModBlocks.SIEVE);
+	public static final BlockEntityType<computer_blockentity> COMPUTER_BLOCK_ENTITY = register("computer", computer_blockentity::new, ModBlocks.COMPUTER);
 
 	private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
 		Identifier id = Identifier.fromNamespaceAndPath(Chou.MOD_ID, name);
