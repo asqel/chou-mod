@@ -97,7 +97,6 @@ public class colored_brush extends Item {
         ItemStack brush = player.getMainHandItem();
         ItemStack bottle = player.getOffhandItem();
         Integer current_dura = brush.getComponents().get(DataComponents.DAMAGE);
-        System.out.println(current_dura);
         if (current_dura <= 0)
             return InteractionResult.PASS;
         if (current_dura == MAX_DURA)

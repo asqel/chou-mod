@@ -43,8 +43,7 @@ public class sieve extends BaseEntityBlock {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public sieve() {
-        super(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("sieve")).sound(SoundType.WOOD).strength(2f).noOcclusion().randomTicks());
-        this.registerDefaultState(this.stateDefinition.any().setValue(HAS_BOTTLE, false).setValue(FACING, Direction.NORTH));
+        this(BlockBehaviour.Properties.of().setId(ModBlocks.keyOfBlock("sieve")).sound(SoundType.WOOD).strength(2f).noOcclusion().randomTicks());
     }
 
 
@@ -103,23 +102,6 @@ public class sieve extends BaseEntityBlock {
 
         player.swing(hand); 
         return InteractionResult.SUCCESS;
-    }
-    @Override
-    protected void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool, boolean dropExperience) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be == null) {
-            super.spawnAfterBreak(state, level, pos, tool, dropExperience);
-            return ;
-        }
-        if (!(be instanceof sieve_blockentity sieve_ent)) {
-            super.spawnAfterBreak(state, level, pos, tool, dropExperience);
-            return ;
-        }
-        level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(0)));
-        level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), sieve_ent.getItem(1)));
-        sieve_ent.getItem(0).setCount(0);
-        sieve_ent.getItem(1).setCount(0);
-        super.spawnAfterBreak(state, level, pos, tool, dropExperience);
     }
 
     public static boolean is_water(ServerLevel level, BlockPos pos) {

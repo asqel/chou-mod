@@ -49,6 +49,8 @@
     "tooltip.chou.brush.14": "Magenta",
     "tooltip.chou.brush.15": "Pink",
     "tooltip.chou.brush.None": "None",
-    "block.chou.crt_tv": "CRT TV"
+    "block.chou.crt_tv": "CRT TV",
+    "item.chou.canoe": "Canoe",
+    "block.chou.computer": "Computer"
 
 }

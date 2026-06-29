@@ -2,6 +2,7 @@ package fr.asqel.chou;
 
 import com.google.common.base.Supplier;
 
+import fr.asqel.chou.items.canoe_item;
 import fr.asqel.chou.items.colored_bottle;
 import fr.asqel.chou.items.colored_brush;
 import fr.asqel.chou.items.great_sword;
@@ -43,26 +44,29 @@ public class ModItems {
 	public static final Item SIEVE = register_block("sieve", ModBlocks.SIEVE);
 	public static final Item STARFISH_FLOWER = register_block("starfish_flower", ModBlocks.STARFISH_FLOWER);
 
-	public static final Item WHITE_WATER_BOTTLE = register("white_water_bottle", () -> {return new colored_bottle("white");});
-	public static final Item LIGHT_GRAY_WATER_BOTTLE = register("light_gray_water_bottle", () -> {return new colored_bottle("light_gray");});
-	public static final Item GRAY_WATER_BOTTLE = register("gray_water_bottle", () -> {return new colored_bottle("gray");});
-	public static final Item BLACK_WATER_BOTTLE = register("black_water_bottle", () -> {return new colored_bottle("black");});
-	public static final Item BROWN_WATER_BOTTLE = register("brown_water_bottle", () -> {return new colored_bottle("brown");});
-	public static final Item RED_WATER_BOTTLE = register("red_water_bottle", () -> {return new colored_bottle("red");});
-	public static final Item ORANGE_WATER_BOTTLE = register("orange_water_bottle", () -> {return new colored_bottle("orange");});
-	public static final Item YELLOW_WATER_BOTTLE = register("yellow_water_bottle", () -> {return new colored_bottle("yellow");});
-	public static final Item LIME_WATER_BOTTLE = register("lime_water_bottle", () -> {return new colored_bottle("lime");});
-	public static final Item GREEN_WATER_BOTTLE = register("green_water_bottle", () -> {return new colored_bottle("green");});
-	public static final Item CYAN_WATER_BOTTLE = register("cyan_water_bottle", () -> {return new colored_bottle("cyan");});
-	public static final Item LIGHT_BLUE_WATER_BOTTLE = register("light_blue_water_bottle", () -> {return new colored_bottle("light_blue");});
-	public static final Item BLUE_WATER_BOTTLE = register("blue_water_bottle", () -> {return new colored_bottle("blue");});
-	public static final Item PURPLE_WATER_BOTTLE = register("purple_water_bottle", () -> {return new colored_bottle("purple");});
-	public static final Item MAGENTA_WATER_BOTTLE = register("magenta_water_bottle", () -> {return new colored_bottle("magenta");});
-	public static final Item PINK_WATER_BOTTLE = register("pink_water_bottle", () -> {return new colored_bottle("pink");});
+	public static final Item WHITE_WATER_BOTTLE = register("white_water_bottle", () -> new colored_bottle("white"));
+	public static final Item LIGHT_GRAY_WATER_BOTTLE = register("light_gray_water_bottle", () -> new colored_bottle("light_gray"));
+	public static final Item GRAY_WATER_BOTTLE = register("gray_water_bottle", () -> new colored_bottle("gray"));
+	public static final Item BLACK_WATER_BOTTLE = register("black_water_bottle", () -> new colored_bottle("black"));
+	public static final Item BROWN_WATER_BOTTLE = register("brown_water_bottle", () -> new colored_bottle("brown"));
+	public static final Item RED_WATER_BOTTLE = register("red_water_bottle", () -> new colored_bottle("red"));
+	public static final Item ORANGE_WATER_BOTTLE = register("orange_water_bottle", () -> new colored_bottle("orange"));
+	public static final Item YELLOW_WATER_BOTTLE = register("yellow_water_bottle", () -> new colored_bottle("yellow"));
+	public static final Item LIME_WATER_BOTTLE = register("lime_water_bottle", () -> new colored_bottle("lime"));
+	public static final Item GREEN_WATER_BOTTLE = register("green_water_bottle", () -> new colored_bottle("green"));
+	public static final Item CYAN_WATER_BOTTLE = register("cyan_water_bottle", () -> new colored_bottle("cyan"));
+	public static final Item LIGHT_BLUE_WATER_BOTTLE = register("light_blue_water_bottle", () -> new colored_bottle("light_blue"));
+	public static final Item BLUE_WATER_BOTTLE = register("blue_water_bottle", () -> new colored_bottle("blue"));
+	public static final Item PURPLE_WATER_BOTTLE = register("purple_water_bottle", () -> new colored_bottle("purple"));
+	public static final Item MAGENTA_WATER_BOTTLE = register("magenta_water_bottle", () -> new colored_bottle("magenta"));
+	public static final Item PINK_WATER_BOTTLE = register("pink_water_bottle", () -> new colored_bottle("pink"));
 
-	public static final Item COLORED_BRUSH = register("colored_brush", () -> {return new colored_brush();});
+	public static final Item COLORED_BRUSH = register("colored_brush", () -> new colored_brush());
 	public static final Item CHAIR = register_block("chair", ModBlocks.CHAIR);
 	public static final Item CRT_TV = register_block("crt_tv", ModBlocks.CRT_TV);
+	public static final Item COMPUTER = register_block("computer", ModBlocks.COMPUTER);
+
+	public static final Item CANOE = register("canoe", () -> new canoe_item());
 
 
 	public static ResourceKey<Item> keyOfItem(String name) {

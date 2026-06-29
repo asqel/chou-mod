@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    ". .",
+    "O_O",
+    "###"
+  ],
+  "key": {
+    ".": "minecraft:gold_nugget",
+    "O": "#minecraft:planks",
+    "_": "#minecraft:wooden_slabs",
+    "#": "#minecraft:terracotta"
+  },
+  "result": {
+    "id": "chou:canoe",
+    "count": 1
+  }
+}

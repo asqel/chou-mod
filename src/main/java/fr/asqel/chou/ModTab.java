@@ -60,6 +60,8 @@ public class ModTab {
 
 				output.accept(ModItems.CHAIR);
 				output.accept(ModItems.CRT_TV);
+				output.accept(ModItems.COMPUTER);
+				output.accept(ModItems.CANOE);
 
 
 

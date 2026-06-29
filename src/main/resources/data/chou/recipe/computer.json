@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "#E#",
+    "=C="
+  ],
+  "key": {
+    "T": "minecraft:tinted_glass",
+    "#": "minecraft:bone_block",
+    "E": "minecraft:ender_eye",
+    "=": "minecraft:iron_ingot",
+    "C": "minecraft:comparator"
+  },
+  "result": {
+    "id": "chou:computer",
+    "count": 1
+  }
+}

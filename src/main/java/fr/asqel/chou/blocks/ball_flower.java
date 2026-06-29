@@ -43,9 +43,9 @@ public class ball_flower extends FlowerBlock implements BonemealableBlock{
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         final ItemStack stack;
-        if (this.flower_name == "yellow_ball_flower")
+        if (this.flower_name.equals("yellow_ball_flower"))
             stack = new ItemStack(ModItems.YELLOW_BALL_FLOWER);
-        else if (this.flower_name == "magenta_ball_flower")
+        else if (this.flower_name.equals("magenta_ball_flower"))
             stack = new ItemStack(ModItems.MAGENTA_BALL_FLOWER);
         else
             stack = new ItemStack(Items.BONE_MEAL);
