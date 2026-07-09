@@ -187,6 +187,7 @@ public class Interpreter {
         if (opcode == OPC_MOV)
             this.registers[a] = (byte)b;
         else if (opcode == OPC_CMP) {
+			this.r_flags = 0;
             a = this.registers[a];
             if (a == b)
                 this.r_flags |= FLAG_EQ;

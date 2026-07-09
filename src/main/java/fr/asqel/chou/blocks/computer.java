@@ -82,7 +82,7 @@ public class computer extends BaseEntityBlock {
                 lst.add(new Filterable<String>(be.pages.get(i), Optional.ofNullable(null)));
 
             WritableBookContent content = new WritableBookContent(lst);
-            to_spawn.applyComponents(DataComponentPatch.builder().set(DataComponents.WRITABLE_BOOK_CONTENT, content).build());
+            to_spawn.applyComponents(DataComponentPatch.builder().set(DataComponents.WRITABLE_BOOK_CONTENT, content).set(DataComponents.CUSTOM_NAME, Component.literal(be.book_name)).build());
 
             level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5 + 1, pos.getZ() + 0.5, to_spawn));
 
@@ -130,6 +130,13 @@ public class computer extends BaseEntityBlock {
         }
 
         be.pages = pages;
+        be.book_name = "";
+        Component compo = stack.getComponents().get(DataComponents.CUSTOM_NAME);
+        if (compo != null) {
+            String str = compo.tryCollapseToString();
+            if (str != null)
+                be.book_name = str;
+        }
         be.code = new Interpreter();
         be.code.set_instructions(asm.output);
 

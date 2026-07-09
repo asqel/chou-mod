@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.network.Filterable;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +27,7 @@ public class computer_blockentity extends BlockEntity {
 
     public Interpreter code = new Interpreter();
     public List<String> pages = new ArrayList<>();
+    public String book_name = "";
 
     public computer_blockentity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.COMPUTER_BLOCK_ENTITY, pos, state);
@@ -33,6 +35,7 @@ public class computer_blockentity extends BlockEntity {
     
     @Override
     protected void saveAdditional(ValueOutput output) {
+        output.putString("chou:book_name", book_name);
         output.putInt("chou:pages_len", pages.size());
         for (int i = 0; i < pages.size(); i++)
             output.putString("chou:page_" + String.valueOf(i), pages.get(i));
@@ -44,6 +47,7 @@ public class computer_blockentity extends BlockEntity {
     protected void loadAdditional(ValueInput input) {
         int pages_len = input.getIntOr("chou:pages_len", 0);
 
+        this.book_name = input.getStringOr("chou:book_name", "");
         this.pages = new ArrayList<>();
         for (int i = 0; i < pages_len; i++)
             pages.add(input.getStringOr("chou:page_" + String.valueOf(i), ""));
@@ -89,7 +93,7 @@ public class computer_blockentity extends BlockEntity {
                 lst.add(new Filterable<String>(this.pages.get(i), Optional.ofNullable(null)));
         
             WritableBookContent content = new WritableBookContent(lst);
-            to_spawn.applyComponents(DataComponentPatch.builder().set(DataComponents.WRITABLE_BOOK_CONTENT, content).build());
+            to_spawn.applyComponents(DataComponentPatch.builder().set(DataComponents.WRITABLE_BOOK_CONTENT, content).set(DataComponents.CUSTOM_NAME, Component.literal(this.book_name)).build());
     
             this.level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, to_spawn));
         }
