@@ -76,7 +76,6 @@ public class computer_blockentity extends BlockEntity {
         for (int i = 0; i < 4; i++)
             entity.code.ports_in[i] = (byte)level.getSignal(blockPos, dirs[(direction_idx + i) % 4]);
 
-        entity.code.reset_ports();
         entity.code.tick();
         level.updateNeighborsAt(blockPos, blockState.getBlock());
     }

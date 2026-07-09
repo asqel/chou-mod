@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Assembler {
-    private HashMap<String, Integer> labels = new HashMap<>();
     private HashMap<String, String> defines = new HashMap<>();
     private String last_scope = "_";
     public List<Integer> output = new ArrayList<>();
+    public List<Instruction> semi_ouput = new ArrayList<>();
 
     public Assembler() {
         this.defines.put("halt", "hlt");
@@ -82,7 +82,7 @@ public class Assembler {
             if (b == -1)
                 return "token.unexpected";
         }
-        output.add(Interpreter.make_inst(info.opcode, a, b));
+        this.semi_ouput.add(new Instruction(Interpreter.make_inst(info.opcode, a, b)));
         return "";
     }
 
@@ -94,7 +94,7 @@ public class Assembler {
         if (time == -1)
             return "token.unexpected";
 
-        output.add(Interpreter.make_sleep(time));
+        this.semi_ouput.add(new Instruction(Interpreter.make_sleep(time)));
         return "";
     }
 
@@ -115,11 +115,10 @@ public class Assembler {
     public String parse_jump(String[] tokens) {
         if (tokens.length != 2)
             return "token.unexpected";
-        Integer label = labels.get(tokens[1]);
-        if (label == null)
-            return "label.undefined";
-        this.output.add(Interpreter.make_jump(label));
+        if (tokens[1].startsWith("."))
+            tokens[1] = this.last_scope + tokens[1];
 
+        this.semi_ouput.add(new Instruction(-1, tokens[1]));
         return "";
     }
 
@@ -139,12 +138,10 @@ public class Assembler {
         }
         if (mod == -1)
             return "jmp.unknown_mod";
+        if (tokens[1].startsWith("."))
+            tokens[1] = this.last_scope + tokens[1];
 
-        Integer label = labels.get(tokens[1]);
-        if (label == null)
-            return "label.undefined";
-        this.output.add(Interpreter.make_jump_cond(label, mod));
-        
+        this.semi_ouput.add(new Instruction(mod, tokens[1]));
         return "";
     }
 
@@ -162,9 +159,7 @@ public class Assembler {
                 line = this.last_scope + line;
             else
                 this.last_scope = line;
-            if (this.labels.containsKey(line))
-                return "label.redefinition";
-            this.labels.put(line, this.output.size());
+            this.semi_ouput.add(new Instruction(line));
             return "";
         }
         String[] tokens = line.split("[\\s,]+");
@@ -194,7 +189,80 @@ public class Assembler {
         else if (tokens[0].charAt(0) == 'j')
             return this.parse_jump_cond(tokens);
 
-
         return "token.unexpected";
     }
+
+    public void build_address() {
+        int next_address = 0;
+        for (int i = 0; i < this.semi_ouput.size(); i++) {
+            Instruction inst = this.semi_ouput.get(i);
+            if (inst.type == Instruction.TYPE_DONE) {
+                inst.address = next_address;
+                next_address++;
+            }
+            else if (inst.type == Instruction.TYPE_JUMP) {
+                inst.address = next_address;
+                next_address++;
+            }
+            else if (inst.type == Instruction.TYPE_LABEL) {
+                inst.address = next_address;
+            }
+        }
+    }
+
+    public int get_label_address(String label) {
+        for (int i = 0; i < this.semi_ouput.size(); i++) {
+            Instruction inst = this.semi_ouput.get(i);
+            if (inst.type == Instruction.TYPE_LABEL && inst.arg.equals(label))
+                return inst.address;
+        }
+        return -1;
+    }
+
+    public String finalize_code() {
+        this.build_address();
+        for (int i = 0; i < this.semi_ouput.size(); i++) {
+            Instruction inst = this.semi_ouput.get(i);
+            if (inst.type == Instruction.TYPE_DONE)
+                this.output.add(inst.instruction);
+            else if (inst.type == Instruction.TYPE_JUMP) {
+                int address = this.get_label_address(inst.arg);
+                if (address < 0)
+                    return "label.undefined";
+                if (inst.instruction == -1)
+                    this.output.add(Interpreter.make_jump(address));
+                else
+                    this.output.add(Interpreter.make_jump_cond(address, inst.instruction));
+            }
+        }
+
+        return "";
+    }
+
+    public class Instruction {
+        public int instruction;
+        public int type;
+        public String arg;
+        public int address;
+
+        public static final int TYPE_DONE = 0;
+        public static final int TYPE_JUMP = 1;
+        public static final int TYPE_LABEL = 2;
+
+        public Instruction(int val) {
+            this.instruction = val;
+            this.type = TYPE_DONE;
+        }
+
+        public Instruction(int val, String label) {
+            this.instruction = val;
+            this.arg = label;
+            this.type = TYPE_JUMP;
+        }
+
+        public Instruction(String label) {
+            this.type = TYPE_LABEL;
+            this.arg = label;
+        }
+    };
 }

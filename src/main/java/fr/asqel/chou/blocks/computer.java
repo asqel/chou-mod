@@ -13,6 +13,7 @@ import fr.asqel.chou.ModBlockEntities;
 import fr.asqel.chou.ModBlocks;
 import fr.asqel.chou.blockentity.computer_blockentity;
 import fr.asqel.chou.utils.Assembler;
+import fr.asqel.chou.utils.Interpreter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentPatch;
@@ -96,6 +97,10 @@ public class computer extends BaseEntityBlock {
             return InteractionResult.FAIL;
 
         List<String> pages = stack.getComponents().get(DataComponents.WRITABLE_BOOK_CONTENT).getPages(false).toList();
+        if (pages.size() == 0 || pages.get(0).length() == 0) {
+            player.swing(hand);
+            return InteractionResult.SUCCESS;
+        }
 
         Assembler asm = new Assembler();
         int page_idx = 0;
@@ -104,7 +109,7 @@ public class computer extends BaseEntityBlock {
             int line_idx = 0;
             for (String line: page.split("\n")) {
                 String err = asm.build_line(line);
-                if (err != "") {
+                if (!err.equals("")) {
                     player.sendSystemMessage(Component.literal(String.format("%d:%d: %s", page_idx + 1, line_idx + 1, err)));
                     has_error = true;
                 }
@@ -117,7 +122,15 @@ public class computer extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
 
+        String error = asm.finalize_code();
+        if (!error.equals("")) {
+            player.sendSystemMessage(Component.literal(error));
+            player.swing(hand);
+            return InteractionResult.SUCCESS;
+        }
+
         be.pages = pages;
+        be.code = new Interpreter();
         be.code.set_instructions(asm.output);
 
         player.getItemInHand(hand).setCount(0);

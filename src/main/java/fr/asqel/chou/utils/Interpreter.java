@@ -179,10 +179,10 @@ public class Interpreter {
     }
     public void do_inst(int opcode, int a, int b) {
         if ((b >> ARG_TYPE_SHIFT) != 0)
-            b = this.registers[b & 0x7f];
+            b = this.registers[b & 0x3f];
         boolean is_reg_a = (a >> ARG_TYPE_SHIFT) != 0;
         if (is_reg_a)
-            a = a & 0x7f;
+            a = a & 0x3f;
 
         if (opcode == OPC_MOV)
             this.registers[a] = (byte)b;
@@ -214,7 +214,7 @@ public class Interpreter {
                 this.registers[a] = (byte)((this.registers[a] % (byte)b) & 0xf);
         }
         else if (opcode == OPC_OUT)
-            this.ports[this.registers[a] % 3] = (byte)b;
+            this.ports[this.registers[a] % 4] = (byte)b;
         else if (opcode == OPC_IN)
             this.registers[a] = this.ports_in[4 % 4];
 
